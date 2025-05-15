@@ -1,4 +1,4 @@
-# 🏗️ Incremental Structure from Motion (SfM)
+#  Incremental Structure from Motion (SfM)
 
 > **Reconstructing 3D structure from unordered 2D images using robust geometry and optimization.**  
 > This project implements an incremental pipeline for recovering both the camera poses and the sparse 3D geometry of a scene, from scratch, using classical computer vision principles.
@@ -22,7 +22,7 @@ This report shows all the steps we followed, the results we got, the problems we
 ##  Project Overview
 
 The goal of this project is to build an incremental Structure from Motion (SfM) system that can make a 3D point cloud from a set of 2D images. The system works by taking one image at a time and slowly creating a 3D shape of the object or scene. At the same time, it also finds the position of the camera for each image. The flowchart shows the SfM pipeline we followed.
-<img src="https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/blob/main/report_imgs\flowchart.jpeg" width="60%"  align="center" ><br>
+<img src="https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/blob/main/report_images/flowchart.jpeg" width="60%"  align="center" ><br>
 
 ---
 In this project, We tested the Structure-from-Motion (SfM) steps using a pre-calibrated dataset.
@@ -37,8 +37,8 @@ This part explains the theory and how we did each step in the incremental Struct
 
 ###  Feature Detection & Matching
 
-Feature detection means finding important points in the images, like corners or blobs. Feature matching finds the same points in different images by comparing their descriptors.  
-We used the SIFT algorithm (cv2.SIFT_create()) to find keypoints and get their descriptors. To match the features, we used a brute-force matcher (cv2.BFMatcher) and applied Lowe’s ratio test to remove unclear matches. Then we used the Fundamental Matrix with RANSAC to keep only the correct matches (called inliers).  
+Feature detection means finding important points in the images, like corners or blobs. Feature matching finds the same points in different images by comparing their descriptors.
+We used the SIFT algorithm (cv2.SIFT_create()) to find keypoints and get their descriptors. To match the features, we used a brute-force matcher (cv2.BFMatcher) and applied Lowe’s ratio test to remove unclear matches. Then we used the Fundamental Matrix with RANSAC to keep only the correct matches (called inliers).
 We matched image pairs one by one and saved the matches along with their Fundamental Matrices. These clean matches were later used for triangulation and finding the camera positions.
 
 **Challenges:**
@@ -53,8 +53,9 @@ We matched image pairs one by one and saved the matches along with their Fundame
 - The Fundamental Matrix estimation gave more than 80% correct matches (inliers) for most image pairs.
 - The visual results showed that matching was consistent, especially between images taken from nearby angles.
 
-*Fig 2.2. Initial 3D point cloud and Camera frustums and pose visualization*  
-![Feature Matching](https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/raw/main/results/feature_matching.png)
+<img src="https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/blob/main/report_images/feature_matching.jpeg" width="60%"  align="center" ><br>
+*Fig 2.2. feature matching*  
+
 - Before RANSAC: Total Matches: 791
 - Before RANSAC: Good Matches: 435
 - Before RANSAC: Bad Matches: 356
@@ -64,7 +65,6 @@ We matched image pairs one by one and saved the matches along with their Fundame
 
 ##  Pose Recovery
 We used cv2.recoverPose() to get the rotation (R) and translation (t) from the Essential Matrix (E).
-*Fig 2.1. Keypoint detection overlays & Matched keypoint lines (inliers only)*  
 
 ---
 
@@ -100,7 +100,7 @@ We used cv2.triangulatePoints() to create the 3D points. After that, we checked 
 - Camera poses were plotted, showing appropriate separation and orientation.
 
 *Fig 2.2. Initial 3D point cloud and Camera frustums and pose visualization*  
-![Initial 3D Reconstruction](https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/raw/main/results/initial_3d_reconstruction.png)
+<img src="https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/blob/main/report_images/initial_reconstruction.jpeg" width="60%"  align="center" ><br>
 
 ---
 
@@ -139,6 +139,8 @@ Here, **K** is the intrinsic matrix.
 To build 3D points, we use `cv2.triangulatePoints()` with the projection data from the first and second cameras and their matching points.
 This function gives points in homogeneous form, so we convert them to Euclidean form to work with them more easily.
 
+![Triangulation](https://raw.githubusercontent.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/main/report_images/triangulation.gif)
+
 ### Incremental Expansion
 
 Incremental SfM adds new images to the reconstruction sequentially by estimating their poses and triangulating new points visible in the added views.  
@@ -164,8 +166,6 @@ New 3D points visible across at least two views were triangulated and merged int
 - Grew the point cloud to over 15,000 high-confidence points.
 - Visualized expanding camera trajectory forming a circular motion around the statue.
 
-*Fig 2.3. Incremental pose and point cloud updates & Projection overlays showing alignment*  
-![Incremental SfM Expansion](https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/raw/main/results/incremental_update.png)
 
 ---
 
@@ -193,8 +193,8 @@ BA was applied globally after all cameras were registered to improve geometric c
 - Improved spatial coherence in the 3D model.
 - Camera pose drift corrected, yielding smoother camera paths.
 
-*Fig 2.4. Before vs after BA point clouds & Reprojection error plots*  
-![Bundle Adjustment Results](https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/raw/main/results/bundle_adjustment_comparison.png)
+![Triangulation](https://raw.githubusercontent.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/main/report_images/ba.gif)
+<br>
 
 ---
 ### Mathematical Formulation
@@ -220,7 +220,7 @@ Visualization is the process of rendering the 3D structure and camera motion for
 
 **Challenges:**
 
-- Large point clouds (~15k+ points) impacted rendering speed.
+- Large point clouds impacted rendering speed.
 - Some points from noisy matches reduced visual clarity.
 - Needed to align scale and axis orientation for accurate interpretation.
 
