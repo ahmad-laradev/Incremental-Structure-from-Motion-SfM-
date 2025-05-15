@@ -284,11 +284,71 @@ Through this hands-on project, we not only deepened our understanding of 3D geom
 
 ##  How to Run 🛠️
 
-Follow the steps below to set up and run the incremental SfM pipeline on your local machine.
+Here’s a clear and concise instruction for how to run the code in your GitHub repo, which you can copy-paste into your `README.md`:
 
-### ✅ Requirements
+````markdown
+# How to Run the Code
 
-Make sure you have Python 3.7+ installed. Then install the dependencies:
+Follow these steps to run the code:
+
+## 1. Clone the Repository
+First, clone this repository to your local machine using the following command:
+
+```bash
+git clone <repository_url>
+````
+
+## 2. Set Up the Directory
+
+After cloning, navigate to the project directory:
+
+```bash
+cd <project_folder>
+```
+
+## 3. Install Dependencies
+
+Ensure you have all the necessary dependencies. You can install them using `pip`:
 
 ```bash
 pip install -r requirements.txt
+```
+
+## 4. Prepare the Images Folder
+
+* Create a folder named `images` inside the project directory.
+* Place your image files in this `images` folder.
+* Ensure the `K.txt` file (which contains the camera intrinsic parameters) is also placed inside the `images` folder. The structure should look like this:
+
+```
+<project_folder>
+│
+└───images
+    │   <image_files>.png
+    │   K.txt
+```
+
+## 5. Modify `main.py`
+
+Open `main.py` and locate the section at the end of the file where paths are defined. Replace the placeholder path with the actual path to your images folder.
+
+Example:
+
+```python
+image_folder = "path_to_your_images_folder"
+```
+
+Replace `"path_to_your_images_folder"` with the full path where your `images` folder is located.
+
+## 6. Run the Code
+
+Now you are ready to run the code. In your terminal, execute:
+
+```bash
+python main.py
+```
+
+### ✅ Requirements
+
+Make sure you have Python 3.7+ installed.
+
