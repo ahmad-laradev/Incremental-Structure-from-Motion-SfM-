@@ -91,7 +91,7 @@ Notice the slight misalignment and drift – this is exactly what BA corrects.
 
 Minimised reprojection error across all cameras and 3D points using `scipy.optimize.least_squares`.
 
-![After BA]([Results with Bundle Adjustment/Results.gif](Results with Bundle Adjustment/Results.gif)
+![After BA](Results with Bundle Adjustment/Results.gif)
 
 
 **Impact:**  
