@@ -1,6 +1,4 @@
-Here's your updated README with the before/after visual comparison and the broken link removed. Copy and paste the entire block.
 
-```markdown
 # Incremental Structure from Motion (SfM)
 
 ---
