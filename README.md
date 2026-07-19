@@ -1,4 +1,6 @@
+Here's your updated README with the before/after visual comparison and the broken link removed. Copy and paste the entire block.
 
+```markdown
 # Incremental Structure from Motion (SfM)
 
 ---
@@ -78,35 +80,42 @@ For each new image:
 
 ---
 
-### 4. Bundle Adjustment (Global Refinement)
+### 4. Results Before Bundle Adjustment
 
-Minimised reprojection error across all cameras and 3D points using `scipy.optimize.least_squares`.
+The point cloud and camera poses after incremental registration, **before** global refinement.  
+Notice the slight misalignment and drift – this is exactly what BA corrects.
 
-![Bundle Adjustment](Results with Bundle Adjustment/Results.gif)
-
-**Impact:**  
-- Reprojection error dropped from ~2.1 px to ~0.5 px.  
-- Camera trajectory became smooth and circular, matching the real acquisition path.
+![Before BA](Results/Results.png)
 
 ---
 
-## Final Reconstruction
+### 5. Bundle Adjustment (Global Refinement)
 
-![Final Sparse Model](report_images/final_pointcloud.png)  
-*(Interactive view in Open3D – colourised by track ID)*
+Minimised reprojection error across all cameras and 3D points using `scipy.optimize.least_squares`.
+
+![After BA](Results with Bundle Adjustment/Results.gif)
+
+**Impact:**  
+- Reprojection error dropped from ~2.1 px to ~0.5 px.  
+- Camera trajectory became smooth and circular, matching the real acquisition path.  
+- The point cloud snapped into a clean, coherent shape (compare with the “before” image above).
 
 ---
 
 ## Repository Structure (After Clean‑Up)
 
 ```
-├── main.py                  # Full SfM pipeline (run from terminal)
-├── sfm/                     # Core modules (feature matching, pose, BA, etc.)
-├── images/                  # Input images + K.txt (calibration)
-├── report_images/           # Figures used in this README and the report
+├── main.py                           # Full SfM pipeline (run from terminal)
+├── sfm/                              # Core modules (feature matching, pose, BA, etc.)
+├── images/                           # Input images + K.txt (calibration)
+├── report_images/                    # Figures used in this README and the report
+├── Results/                          # Output before bundle adjustment
+│   └── Results.png
+├── Results with Bundle Adjustment/   # Output after bundle adjustment
+│   └── Results.gif
 ├── requirements.txt
 ├── README.md
-└── SfM_Report.pdf           # Detailed project report
+└── SfM_Report.pdf                    # Detailed project report
 ```
 
 ---
