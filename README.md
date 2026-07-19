@@ -1,13 +1,9 @@
 
 # Incremental Structure from Motion (SfM)
 
-*Recovering camera poses and sparse 3D geometry from unordered images – a complete, ground‑up pipeline.*
-
-![Bundle Adjustment](report_images/ba.gif)
-
 ---
 
-## What I Built (and Why It Matters)
+## What I Built
 
 I implemented an **incremental Structure from Motion** system from scratch. Starting from a set of uncalibrated images of a statue (the Middlebury Temple Ring dataset), the pipeline automatically:
 
@@ -86,7 +82,7 @@ For each new image:
 
 Minimised reprojection error across all cameras and 3D points using `scipy.optimize.least_squares`.
 
-![Bundle Adjustment](report_images/ba.gif)
+![Bundle Adjustment](Results with Bundle Adjustment/Results.gif)
 
 **Impact:**  
 - Reprojection error dropped from ~2.1 px to ~0.5 px.  
