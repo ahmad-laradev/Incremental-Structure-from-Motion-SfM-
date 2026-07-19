@@ -91,7 +91,8 @@ Notice the slight misalignment and drift – this is exactly what BA corrects.
 
 Minimised reprojection error across all cameras and 3D points using `scipy.optimize.least_squares`.
 
-![After BA](Results with Bundle Adjustment/Results.gif)
+![After BA]([Results with Bundle Adjustment/Results.gif](https://github.com/ahmad-laradev/Incremental-Structure-from-Motion-SfM-/blob/ec6ff269eace7c4dba5d1a124be99205b567a685/Results%20with%20Bundle%20Adjustment/Results.gif))
+
 
 **Impact:**  
 - Reprojection error dropped from ~2.1 px to ~0.5 px.  
